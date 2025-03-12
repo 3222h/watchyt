@@ -1,20 +1,18 @@
 function playNextVideo() {
   console.log('Checking for next video button...');
 
-  const nextButton = document.querySelector('button.ytp-next-button') || document.querySelector('a.ytp-next-button');
-  
-  if (nextButton) {
-    console.log('Next button found:', nextButton);
-    console.log('Is button visible?', nextButton.offsetParent !== null);
-    console.log('Clicking the next button...');
+  const nextButton = document.querySelector('.ytp-next-button');
 
-    nextButton.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+  if (nextButton && nextButton.offsetParent !== null) { 
+    console.log('Next button found and visible:', nextButton);
+    nextButton.click();
   } else {
-    console.log('Next button not found.');
+    console.log('Next button not found or not visible.');
   }
 }
 
-setTimeout(playNextVideo, 60000);
-setTimeout(playNextVideo, 120000);
-setTimeout(playNextVideo, 240000);
-setTimeout(playNextVideo, 360000);
+// Schedule the function at specific timeouts
+setTimeout(playNextVideo, 60000);   // After 1 minute
+setTimeout(playNextVideo, 120000);  // After 2 minutes
+setTimeout(playNextVideo, 240000);  // After 4 minutes
+setTimeout(playNextVideo, 360000);  // After 6 minutes
