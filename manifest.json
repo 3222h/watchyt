@@ -2,12 +2,12 @@
   "manifest_version": 3,
   "name": "YouTube Auto Next Video",
   "version": "1.0",
-  "description": "Automatically plays the next video on YouTube every minute.",
-  "permissions": ["activeTab"],
+  "description": "Automatically plays the next YouTube video every minute.",
+  "permissions": ["tabs", "activeTab"],
   "content_scripts": [
     {
-      "matches": ["https://www.youtube.com/watch?v=*"],
-      "js": ["content.js"]
+      "matches": ["*://www.youtube.com/watch?v=*"] ,
+      "js": ["autoNext.js"]
     }
   ]
 }
