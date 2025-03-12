@@ -1,8 +1,11 @@
 (function() {
   function goToNextVideo() {
     const nextButton = document.querySelector("a.ytp-next-button");
-    if (nextButton) {
+    if (nextButton && !document.hidden) {
       nextButton.click();
+      console.log("Next video triggered");
+    } else {
+      console.log("Next button not found or tab not active");
     }
   }
 
