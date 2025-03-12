@@ -12,10 +12,4 @@ document.getElementById('stop').addEventListener('click', () => {
   });
 });
 
-function enableSpoofing() {
-  localStorage.setItem('spoofing', 'true');
-}
-
-function disableSpoofing() {
-  localStorage.setItem('spoofing', 'false');
-}
+function enableSpo
