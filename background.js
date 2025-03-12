@@ -1,8 +1,8 @@
 let loopCount = 0;
 let active = false;
 let interval;
-let phase = '60min';
-let timeRemaining = 3600000;
+let phase = '5min';
+let timeRemaining = 300000;
 
 function startExtension() {
   if (active) return;
@@ -19,8 +19,8 @@ function stopExtension() {
 function restartExtension() {
   clearInterval(interval);
   loopCount = 0;
-  phase = '60min';
-  timeRemaining = 3600000;
+  phase = '5min';
+  timeRemaining = 300000;
   startExtension();
 }
 
@@ -48,13 +48,13 @@ function runTimer() {
         }
       });
 
-      if (phase === '60min') {
-        phase = '5min';
-        timeRemaining = 300000;
+      if (phase === '5min') {
+        phase = '1min';
+        timeRemaining = 60000;
       } else {
         loopCount++;
-        phase = '60min';
-        timeRemaining = 3600000;
+        phase = '5min';
+        timeRemaining = 300000;
         if (loopCount >= 10) {
           stopExtension();
           return;
