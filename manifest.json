@@ -3,11 +3,11 @@
   "name": "YouTube Auto Next Video",
   "version": "1.0",
   "description": "Automatically plays the next YouTube video every minute.",
-  "permissions": ["tabs", "activeTab"],
+  "permissions": ["activeTab"],
   "content_scripts": [
     {
-      "matches": ["*://www.youtube.com/watch?v=*"] ,
-      "js": ["autoNext.js"]
+      "matches": ["https://www.youtube.com/watch?v=*"]
+      "js": ["content.js"]
     }
   ]
 }
