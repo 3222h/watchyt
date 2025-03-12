@@ -6,9 +6,3 @@ document.getElementById('start').addEventListener('click', async () => {
 document.getElementById('stop').addEventListener('click', () => {
   chrome.runtime.sendMessage({ action: 'stop' });
 });
-
-// background message listener
-chrome.runtime.onMessage.addListener((message) => {
-  if (message.action === 'start') startSkipping(message.tabId);
-  else if (message.action === 'stop') stopSkipping();
-});
