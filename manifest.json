@@ -2,6 +2,7 @@
   "manifest_version": 3,
   "name": "YouTube Activity Spoofer",
   "version": "1.0",
+  "description": "Simulate user activity on YouTube to prevent inactivity detection.",
   "permissions": [
     "scripting",
     "tabs",
