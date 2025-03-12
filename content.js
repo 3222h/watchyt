@@ -5,4 +5,7 @@ function playNextVideo() {
   }
 }
 
-setInterval(playNextVideo, 60000);
+setTimeout(playNextVideo, 10000);
+setTimeout(playNextVideo, 20000);
+setTimeout(playNextVideo, 40000);
+setTimeout(playNextVideo, 30000);
