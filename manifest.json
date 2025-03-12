@@ -1,15 +1,15 @@
 {
   "manifest_version": 3,
   "name": "YouTube Auto Next Video",
-  "version": "1.1",
-  "description": "Automatically plays the next YouTube video.",
-  "permissions": ["tabs"],
+  "version": "1.0",
+  "description": "Automatically plays the next video on YouTube every minute, even in inactive tabs.",
+  "permissions": ["activeTab", "tabs"],
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches": ["https://www.youtube.com/watch?v=*"] ,
+      "matches": ["*://www.youtube.com/watch?v=*"]
       "js": ["content.js"]
     }
   ]
