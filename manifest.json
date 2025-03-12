@@ -1,28 +1,13 @@
 {
   "manifest_version": 3,
-  "name": "YouTube Activity Spoofer",
+  "name": "YouTube Auto Next Video",
   "version": "1.0",
-  "description": "Simulate user activity on YouTube to prevent inactivity detection.",
-  "permissions": [
-    "scripting",
-    "tabs",
-    "activeTab",
-    "webNavigation",
-    "storage"
-  ],
-  "background": {
-    "service_worker": "background.js"
-  },
+  "description": "Automatically plays the next video on YouTube every minute.",
+  "permissions": ["activeTab"],
   "content_scripts": [
     {
-      "matches": ["*://*.youtube.com/*"],
+      "matches": ["https://www.youtube.com/watch?v=*"] ,
       "js": ["content.js"]
     }
-  ],
-  "action": {
-    "default_popup": "popup.html"
-  },
-  "host_permissions": [
-    "*://*.youtube.com/*"
   ]
 }
