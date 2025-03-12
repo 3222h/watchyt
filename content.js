@@ -14,4 +14,15 @@ function playNextVideo() {
   }
 }
 
-setInterval(playNextVideo, 60000);
+// Schedule video play with different intervals: 5min, then 1min repeatedly
+const intervals = [300000, 60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000, 60000];
+let index = 0;
+
+function scheduleNext() {
+  playNextVideo();
+  const nextInterval = intervals[index % intervals.length];
+  index++;
+  setTimeout(scheduleNext, nextInterval);
+}
+
+scheduleNext();
