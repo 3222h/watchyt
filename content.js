@@ -22,7 +22,12 @@ function playNextVideo() {
 }
 
 // Schedule the function at specific timeouts
-setTimeout(playNextVideo, 60000);   // After 1 minute
-setTimeout(playNextVideo, 120000);  // After 2 minutes
-setTimeout(playNextVideo, 240000);  // After 4 minutes
-setTimeout(playNextVideo, 360000);  // After 6 minutes
+setTimeout(playNextVideo, 10000);   // After 1 minute
+setTimeout(playNextVideo, 20000);  // After 2 minutes
+setTimeout(playNextVideo, 30000);  // After 4 minutes
+setTimeout(playNextVideo, 40000);  // After 6 minutes
+setTimeout(playNextVideo, 50000);
+setTimeout(playNextVideo, 60000);
+setTimeout(playNextVideo, 70000);
+setTimeout(playNextVideo, 80000);
+setTimeout(playNextVideo, 90000);
