@@ -3,23 +3,15 @@ function playNextVideo() {
 
   const nextButton = document.querySelector('button.ytp-next-button') || document.querySelector('a.ytp-next-button');
   
-  if (nextButton && nextButton.offsetParent !== null) { // Ensure button is visible
-    console.log('Next button found and visible:', nextButton);
+  if (nextButton) {
+    console.log('Next button found:', nextButton);
+    console.log('Is button visible?', nextButton.offsetParent !== null);
+    console.log('Clicking the next button...');
+
     nextButton.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
   } else {
-    console.log('Next button not found or not visible.');
+    console.log('Next button not found.');
   }
 }
 
-// Schedule video play with a 5 min initial delay, then every 1 min
-const intervals = [300000, 60000];
-let index = 0;
-
-function scheduleNext() {
-  playNextVideo();
-  const nextInterval = intervals[Math.min(index, 1)]; // 5 min first, then 1 min
-  index++;
-  setTimeout(scheduleNext, nextInterval);
-}
-
-scheduleNext();
+setInterval(playNextVideo, 60000);
