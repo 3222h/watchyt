@@ -14,4 +14,4 @@ function playNextVideo() {
   }
 }
 
-setInterval(playNextVideo, 60000);
+setInterval(playNextVideo, 60000); // for repeate same time 
