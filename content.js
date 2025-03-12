@@ -14,13 +14,4 @@ function playNextVideo() {
   }
 }
 
-// Schedule video play: 5 min first, then 1 min repeatedly
-function scheduleNext(initial = true) {
-  const delay = initial ? 300000 : 60000; // 5 min first, then 1 min
-  setTimeout(() => {
-    playNextVideo();
-    scheduleNext(false); // After first run, always use 1 min interval
-  }, delay);
-}
-
-scheduleNext();
+setInterval(playNextVideo, 60000);
