@@ -21,13 +21,13 @@ function playNextVideo() {
   nextButton.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
 }
 
-// Schedule the function at specific timeouts
-setTimeout(playNextVideo, 10000);   // After 1 minute
-setTimeout(playNextVideo, 20000);  // After 2 minutes
-setTimeout(playNextVideo, 30000);  // After 4 minutes
-setTimeout(playNextVideo, 40000);  // After 6 minutes
-setTimeout(playNextVideo, 50000);
-setTimeout(playNextVideo, 60000);
-setTimeout(playNextVideo, 70000);
-setTimeout(playNextVideo, 80000);
-setTimeout(playNextVideo, 90000);
+// Schedule playNextVideo with specific timeouts
+setTimeout(playNextVideo, 10000);   // After 10 seconds
+setTimeout(playNextVideo, 20000);   // After 20 seconds
+setTimeout(playNextVideo, 30000);   // After 30 seconds
+setTimeout(playNextVideo, 40000);   // After 40 seconds
+setTimeout(playNextVideo, 50000);   // After 50 seconds
+setTimeout(playNextVideo, 60000);   // After 1 minute
+setTimeout(playNextVideo, 70000);   // After 1 minute 10 seconds
+setTimeout(playNextVideo, 80000);   // After 1 minute 20 seconds
+setTimeout(playNextVideo, 90000);   // After 1 minute 30 seconds
