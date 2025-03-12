@@ -3,19 +3,24 @@ const timeIntervals = [300000, 60000, 60000, 60000, 60000, 60000, 60000, 60000, 
 
 function startSkipping(tabId) {
   let count = 0;
-  intervalId = setInterval(() => {
+  function skip() {
+    if (count >= timeIntervals.length) {
+      stopSkipping();
+      return;
+    }
     chrome.scripting.executeScript({
       target: { tabId },
       function: nextVideo
     });
+    intervalId = setTimeout(skip, timeIntervals[count]);
     count++;
-    if (count >= timeIntervals.length) stopSkipping();
-  }, timeIntervals[count]);
+  }
+  skip();
   chrome.runtime.sendMessage({ status: 'running' });
 }
 
 function stopSkipping() {
-  if (intervalId) clearInterval(intervalId);
+  if (intervalId) clearTimeout(intervalId);
   intervalId = null;
   chrome.runtime.sendMessage({ status: 'stopped' });
 }
