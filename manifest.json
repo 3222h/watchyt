@@ -1,12 +1,27 @@
 {
   "manifest_version": 3,
-  "name": "YouTube Auto Next Video",
+  "name": "YouTube Activity Spoofer",
   "version": "1.0",
-  "permissions": ["activeTab", "scripting"],
+  "permissions": [
+    "scripting",
+    "tabs",
+    "activeTab",
+    "webNavigation",
+    "storage"
+  ],
   "background": {
     "service_worker": "background.js"
   },
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["content.js"]
+    }
+  ],
   "action": {
     "default_popup": "popup.html"
-  }
+  },
+  "host_permissions": [
+    "*://*.youtube.com/*"
+  ]
 }
