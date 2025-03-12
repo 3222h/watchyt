@@ -3,12 +3,22 @@ function playNextVideo() {
 
   const nextButton = document.querySelector('.ytp-next-button');
 
-  if (nextButton && nextButton.offsetParent !== null) { 
-    console.log('Next button found and visible:', nextButton);
-    nextButton.click();
-  } else {
-    console.log('Next button not found or not visible.');
+  if (!nextButton) {
+    console.log('Next button not found.');
+    return;
   }
+
+  console.log('Next button found:', nextButton);
+  console.log('Is button visible?', nextButton.offsetParent !== null);
+
+  if (nextButton.offsetParent === null) {
+    console.log('Button is hidden and not clickable.');
+    return;
+  }
+
+  console.log('Clicking the next button...');
+  nextButton.focus();
+  nextButton.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
 }
 
 // Schedule the function at specific timeouts
