@@ -11,11 +11,13 @@ function startSkipping(tabId) {
     count++;
     if (count >= timeIntervals.length) stopSkipping();
   }, timeIntervals[count]);
+  chrome.runtime.sendMessage({ status: 'running' });
 }
 
 function stopSkipping() {
   if (intervalId) clearInterval(intervalId);
   intervalId = null;
+  chrome.runtime.sendMessage({ status: 'stopped' });
 }
 
 function nextVideo() {
