@@ -18,4 +18,7 @@ chrome.runtime.onMessage.addListener((message) => {
   if (message.loopCount !== undefined) {
     document.getElementById('status').textContent = `Loops completed: ${message.loopCount}`;
   }
+  if (message.timeRemaining !== undefined) {
+    document.getElementById('timer').textContent = `Time remaining: ${message.timeRemaining}`;
+  }
 });
