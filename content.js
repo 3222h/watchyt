@@ -5,4 +5,4 @@ function playNextVideo() {
   }
 }
 
-setInterval(playNextVideo, 60000); // Trigger every 1 minute
+setInterval(playNextVideo, 60000);
