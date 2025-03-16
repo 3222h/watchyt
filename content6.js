@@ -58,8 +58,8 @@ function runSimulation() {
     // Start the simulation
     simulateEvents();
 
-    // Set a random interval between 3 to 4 minutes for the next run
-    const randomTime = (Math.random() * 60 + 180) * 1000; // 180,000ms (3min) to 240,000ms (4min)
+    // Set a random interval between 20 to 80 minutes for the next run
+const randomTime = (Math.random() * 60 + 20) * 60 * 1000; // 1,200,000ms (20min) to 4,800,000ms (80min)
     setTimeout(runSimulation, randomTime);
   });
 }
