@@ -1,0 +1,20 @@
+{
+    "manifest_version": 3,
+    "name": "Auto Enhancer",
+    "version": "1.1",
+    "description": "Automatically interacts with webpages, including YouTube.",
+    "permissions": ["storage", "tabs"],
+    "host_permissions": ["<all_urls>"],
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["content1.js", "content2.js", "content3.js", "content4.js", "content5.js", "content6.js"]
+        }
+    ]
+}
