@@ -3,13 +3,14 @@ function simulateHumanMouse() {
     let targetX = mouseX, targetY = mouseY;
     let isTabActive = true;
     let lastMoveTime = performance.now();
+    let runDuration = 10 * 1000; // Run the script for 10 seconds
+    let startTime = performance.now();
 
     // Detect if the tab is active
     document.addEventListener("visibilitychange", () => {
         isTabActive = !document.hidden;
     });
 
-    // Generate a realistic movement path with acceleration & random adjustments
     function getRandomTarget() {
         return {
             x: Math.random() * window.innerWidth,
@@ -25,22 +26,25 @@ function simulateHumanMouse() {
 
     function moveMouse() {
         if (!isTabActive) return setTimeout(moveMouse, 500);
+        
+        if (performance.now() - startTime > runDuration) {
+            return; // Stop the script after 10 seconds
+        }
 
         let now = performance.now();
         let deltaTime = now - lastMoveTime;
         lastMoveTime = now;
 
         if (Math.abs(mouseX - targetX) < 5 && Math.abs(mouseY - targetY) < 5) {
-            // New movement starts from the last position
             targetX = getRandomTarget().x;
             targetY = getRandomTarget().y;
-            if (Math.random() < 0.3) return setTimeout(moveMouse, Math.random() * 1000 + 300); // Random pause
+            if (Math.random() < 0.3) return setTimeout(moveMouse, Math.random() * 1000 + 300);
         }
 
         let midX = (mouseX + targetX) / 2 + (Math.random() - 0.5) * 100;
         let midY = (mouseY + targetY) / 2 + (Math.random() - 0.5) * 100;
 
-        let t = Math.min(1, deltaTime / 1000); // Adjust time factor
+        let t = Math.min(1, deltaTime / 1000);
         let newPoint = getBezierCurvePoint(t, { x: mouseX, y: mouseY }, { x: midX, y: midY }, { x: targetX, y: targetY });
 
         mouseX = newPoint.x;
@@ -64,5 +68,5 @@ function simulateHumanMouse() {
 // Run the script once every minute
 setInterval(simulateHumanMouse, 60000);
 
-// Run it immediately once on page load
+// Run it immediately on page load
 simulateHumanMouse();
