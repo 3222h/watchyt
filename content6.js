@@ -1,68 +1,62 @@
-function runSimulation() {
-  chrome.storage.local.get("trackingData", function(result) {
-    const trackingData = result.trackingData || [];
+(function simulateHumanMouse() {
+    let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+    let targetX = mouseX, targetY = mouseY;
+    let isTabActive = true;
+    let lastMoveTime = performance.now();
 
-    function timeToMilliseconds(time) {
-      return new Date(time).getTime();
-    }
+    // Detect if the tab is active
+    document.addEventListener("visibilitychange", () => {
+        isTabActive = !document.hidden;
+    });
 
-    function simulateMouseEvent(type, x, y) {
-      const event = new MouseEvent(type, {
-        bubbles: true,
-        cancelable: true,
-        clientX: x,
-        clientY: y,
-      });
-      document.dispatchEvent(event);
-    }
-
-    function adjustCoordinates(x, y) {
-      const screenWidth = window.innerWidth;
-      const screenHeight = window.innerHeight;
-      const maxWidth = 1920;
-      const maxHeight = 1080;
-
-      const adjustedX = (x / maxWidth) * screenWidth;
-      const adjustedY = (y / maxHeight) * screenHeight;
-
-      return { x: adjustedX, y: adjustedY };
-    }
-
-    function synchronizeWithRealTime() {
-      const currentTime = new Date().getTime();
-      const firstEventTime = timeToMilliseconds(trackingData[0].time);
-      const timeDifference = currentTime - firstEventTime;
-
-      return trackingData.map(entry => {
-        const adjustedTime = timeToMilliseconds(entry.time) + timeDifference;
+    // Generate a realistic movement path with acceleration & random adjustments
+    function getRandomTarget() {
         return {
-          ...entry,
-          time: new Date(adjustedTime).toISOString(),
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight
         };
-      });
     }
 
-    function simulateEvents() {
-      const adjustedTrackingData = synchronizeWithRealTime();
-      
-      adjustedTrackingData.forEach((entry, index) => {
-        const { time, event, x, y } = entry;
-        const adjusted = adjustCoordinates(x, y);
-
-        setTimeout(() => {
-          simulateMouseEvent(event, adjusted.x, adjusted.y);
-        }, timeToMilliseconds(time) - timeToMilliseconds(adjustedTrackingData[0].time));
-      });
+    function getBezierCurvePoint(t, p0, p1, p2) {
+        let x = (1 - t) * (1 - t) * p0.x + 2 * (1 - t) * t * p1.x + t * t * p2.x;
+        let y = (1 - t) * (1 - t) * p0.y + 2 * (1 - t) * t * p1.y + t * t * p2.y;
+        return { x, y };
     }
 
-    // Start the simulation
-    simulateEvents();
+    function moveMouse() {
+        if (!isTabActive) return setTimeout(moveMouse, 500);
 
-    // Set a random interval between 20 to 80 minutes for the next run
-const randomTime = (Math.random() * 60 + 20) * 60 * 1000; // 1,200,000ms (20min) to 4,800,000ms (80min)
-    setTimeout(runSimulation, randomTime);
-  });
-}
+        let now = performance.now();
+        let deltaTime = now - lastMoveTime;
+        lastMoveTime = now;
 
-// Start the first run
-runSimulation();
+        if (Math.abs(mouseX - targetX) < 5 && Math.abs(mouseY - targetY) < 5) {
+            // New movement starts from the last position
+            targetX = getRandomTarget().x;
+            targetY = getRandomTarget().y;
+            if (Math.random() < 0.3) return setTimeout(moveMouse, Math.random() * 1000 + 300); // Random pause
+        }
+
+        let midX = (mouseX + targetX) / 2 + (Math.random() - 0.5) * 100;
+        let midY = (mouseY + targetY) / 2 + (Math.random() - 0.5) * 100;
+
+        let t = Math.min(1, deltaTime / 1000); // Adjust time factor
+        let newPoint = getBezierCurvePoint(t, { x: mouseX, y: mouseY }, { x: midX, y: midY }, { x: targetX, y: targetY });
+
+        mouseX = newPoint.x;
+        mouseY = newPoint.y;
+
+        let eventTarget = document.elementFromPoint(mouseX, mouseY);
+
+        if (eventTarget) {
+            eventTarget.dispatchEvent(new MouseEvent("mousemove", { bubbles: true, clientX: mouseX, clientY: mouseY }));
+            eventTarget.dispatchEvent(new MouseEvent("mouseover", { bubbles: true, clientX: mouseX, clientY: mouseY }));
+            eventTarget.dispatchEvent(new MouseEvent("mouseenter", { bubbles: true, clientX: mouseX, clientY: mouseY }));
+            eventTarget.dispatchEvent(new MouseEvent("mouseleave", { bubbles: true, clientX: mouseX, clientY: mouseY }));
+        }
+
+        requestAnimationFrame(moveMouse);
+    }
+
+    moveMouse();
+})();
