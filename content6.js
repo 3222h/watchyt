@@ -1,4 +1,4 @@
-(function simulateHumanMouse() {
+function simulateHumanMouse() {
     let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
     let targetX = mouseX, targetY = mouseY;
     let isTabActive = true;
@@ -59,4 +59,10 @@
     }
 
     moveMouse();
-})();
+}
+
+// Run the script once every minute
+setInterval(simulateHumanMouse, 60000);
+
+// Run it immediately once on page load
+simulateHumanMouse();
