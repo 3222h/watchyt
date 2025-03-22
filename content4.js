@@ -1,5 +1,5 @@
 function setVideoQuality() {
-    var qualityMenu = document.querySelector('.ytp-settings-button');
+    let qualityMenu = document.querySelector('.ytp-settings-button');
 
     if (qualityMenu) {
         qualityMenu.click();
@@ -28,13 +28,13 @@ function setVideoQuality() {
     }
 }
 
-// Check if the video is loaded every 500ms until found
-let videoInterval = setInterval(function () {
+// Check if the video is loaded every 500ms
+let videoInterval = setInterval(() => {
     let video = document.querySelector('video');
     if (video) {
-        clearInterval(videoInterval); // Stop checking once video is found
-        video.addEventListener('playing', function () {
-            setTimeout(setVideoQuality, 15000); // Delay for 15 seconds before changing the quality
+        clearInterval(videoInterval);
+        video.addEventListener('playing', () => {
+            setTimeout(setVideoQuality, 15000); // Delay before changing quality
         }, { once: true });
     }
 }, 500);
