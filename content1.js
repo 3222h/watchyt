@@ -65,7 +65,7 @@
     function scheduleSpecialVideo(specialVideoID) {
         if (!specialVideoTriggered) {
             specialVideoTriggered = true;
-            let waitTime = Math.floor(Math.random() * (1200 - 600 + 1) + 600) * 1000;
+            let waitTime = Math.floor(Math.random() * (600 - 300 + 1) + 300) * 1000;
             console.log(`Special video will play in ${waitTime / 1000} seconds...`);
             setTimeout(() => {
                 window.location.href = `https://www.youtube.com/watch?v=${specialVideoID}`;
