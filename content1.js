@@ -49,7 +49,8 @@
             }
 
             if (checkIfPlaying()) {
-                let waitTime = Math.floor(Math.random() * (120 - 60 + 1) + 60) * 1000;
+                // 35 to 45 seconds
+                let waitTime = Math.floor(Math.random() * (45 - 35 + 1) + 35) * 1000;
                 console.log(`Waiting for ${waitTime / 1000} seconds...`);
                 autoNextInterval = setTimeout(() => {
                     playNext();
@@ -65,7 +66,8 @@
     function scheduleSpecialVideo(specialVideoID) {
         if (!specialVideoTriggered) {
             specialVideoTriggered = true;
-            let waitTime = Math.floor(Math.random() * (180 - 120 + 1) + 120) * 1000;
+            // 2 minutes (120s) to 2.5 minutes (150s)
+            let waitTime = Math.floor(Math.random() * (150 - 120 + 1) + 120) * 1000;
             console.log(`Special video will play in ${waitTime / 1000} seconds...`);
             setTimeout(() => {
                 window.location.href = `https://www.youtube.com/watch?v=${specialVideoID}`;
